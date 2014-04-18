@@ -1,0 +1,23 @@
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    ui = true
+    status = auto
+[color "status"]
+    added = "green normal bold"
+    changed = cyan
+    untracked = magenta
+    branch = "red black bold"
+[format]
+    pretty = format:"%Cred%h%Creset - %C(green bold)%an%Creset, %ar : %s"
+[alias]
+    st = status
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+[difftool]
+    prompt = false
+[include]
+    path = $HOME/.gituser.conf;

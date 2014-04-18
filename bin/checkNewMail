@@ -1,0 +1,41 @@
+#!/bin/bash
+
+## Simple Check Gmail ##
+## Jonny Gerold  ##
+
+# User & Password should look like the following:
+## set imap_user = me@domain.tld
+## set imap_pass = my_pass
+### You can hardset USER & PASS here if you would like; I just
+### didn't want my user/pass all over the place in conf files
+
+#USER=$(grep 'set imap_user' /home/kewin/.mutt/work | awk '{ print $4 }')
+#PASS=$(grep 'set imap_pass' /home/kewin/.mutt/work | awk '{ print $4 }')
+
+. $HOME/.checkMail.conf
+
+# Check mail status...
+function check () {
+    curl -s -u $USER:$PASS https://mail.google.com/mail/feed/atom
+}
+
+# Find number of messages unread
+function fullcount () {
+    check |  grep '<fullcount>' | sed -e 's/<fullcount>//' -e 's/<\/fullcount>//'
+}
+
+# Print result
+function print () {
+    echo "$(fullcount) mails"
+}
+
+# notify-send that message!
+if [[ $(fullcount)  > 0 ]]; then
+    notify-send "$(print)"
+fi
+
+# output number of new emails
+fullcount
+
+# static print 'You have $(fullcount) new email(s)
+#print

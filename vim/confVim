@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TARGET=$(cut -d'/' -f5 <<< `pwd -P`)
+localInc=/opt/genbox/targets/$TARGET/root/usr/local/include
+Inc=/opt/genbox/targets/$TARGET/root/usr/include
+workdir=$(pwd -P)
+ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q -f /tmp/tagsLocalInc $localInc
+ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q -f /tmp/tagsInc $Inc
+ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q -f /tmp/tags $workdir

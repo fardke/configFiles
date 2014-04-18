@@ -1,0 +1,20 @@
+#!/bin/sh
+
+
+
+WKDIR="/usr/targets/current/root/home/dev/"
+
+if [ "${ROOT}" == "/" ] || [ -z "${ROOT}" ]; then
+    echo "Calling xshell"
+    xshell $0 "$@"
+else
+    . /sbin/functions.sh
+    PROJECT_PATH=$(cd $(dirname $0); pwd)
+    CFLAGS="$CFLAGS -I$WKDIR/root/usr/local/include -I$WKDIR/root/usr/local/include/dbus-c++-1 -I$WKDIR/root/usr/local/include/libstrategy"
+    CXXFLAGS="$CXXFLAGS -I$WKDIR/root/usr/local/include -I$WKDIR/root/usr/local/include/dbus-c++-1 -I$WKDIR/root/usr/local/include/libstrategy"
+    LDFLAGS="$LDFLAGS -L$WKDIR/root/usr/local/lib"
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$WKDIR/root/usr/local/lib/pkgconfig"
+
+    ${PROJECT_PATH}/configure --host=${CHOST} $@
+fi
+

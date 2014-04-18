@@ -1,0 +1,27 @@
+@CS@
+@C@ Copyright (C) @YEAR@ @AUTHOR@
+@C@
+@C@ This software is provided 'as-is', without any express or implied
+@C@ warranty.  In no event will the authors be held liable for any damages
+@C@ arising from the use of this software.
+@C@
+@C@ Permission is granted to anyone to use this software for any purpose,
+@C@ including commercial applications, and to alter it and redistribute it
+@C@ freely, subject to the following restrictions:
+@C@
+@C@ 1. The origin of this software must not be misrepresented; you must not
+@C@    claim that you wrote the original software. If you use this software
+@C@    in a product, an acknowledgment in the product documentation would be
+@C@    appreciated but is not required.
+@C@ 2. Altered source versions must be plainly marked as such, and must not be
+@C@    misrepresented as being the original software.
+@C@ 3. This notice may not be removed or altered from any source distribution.
+@C@
+@C@ @FILENAME@
+@C@
+@C@        Created on: @DATE@
+@C@   Original Author: @LOGIN@
+@C@
+@CE@
+
+
