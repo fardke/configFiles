@@ -35,6 +35,13 @@ authentification:
    USER=toto
    PASS=password
 
+You must use i3ConfigMerge file at configFiles root to generate appropriate config file
+a config.base and config.fix or config.laptop merge.
+
+And each time you want to update i3 config you must modify config.base to update generic
+configuration, config.fix to update specific desktop (with 2 monitor) configuration or
+config.laptop to update specific laptop configuration.
+
 bashrc
 ~~~~~~
 
