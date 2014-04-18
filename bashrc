@@ -8,7 +8,9 @@ if [ -d ~/bin ] ;then
  PATH=~/bin:"$PATH"
 fi
 
-. /etc/bash_completion
+if [ -f /etc/bash_completion ] ;then
+    . /etc/bash_completion
+fi
 
 if [ -f $HOME/.bash_spec ] ;then
     . $HOME/.bash_spec
