@@ -20,4 +20,4 @@
 [difftool]
     prompt = false
 [include]
-    path = $HOME/.gituser.conf;
+    path = ~/.gituser.conf;
