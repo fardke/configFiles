@@ -12,7 +12,7 @@
 #USER=$(grep 'set imap_user' /home/kewin/.mutt/work | awk '{ print $4 }')
 #PASS=$(grep 'set imap_pass' /home/kewin/.mutt/work | awk '{ print $4 }')
 
-. $HOME/.checkMail.conf
+. $HOME/.checkMailIdentity.conf
 
 # Check mail status...
 function check () {
