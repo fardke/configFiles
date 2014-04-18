@@ -10,6 +10,7 @@ Supported configuration
 * vim
 * git
 * i3 (status bar with conky)
+* Xdefaults (urxvt)
 
 git
 ~~~

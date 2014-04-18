@@ -1,0 +1,12 @@
+URxvt*scrollBar:                       false
+URxvt*foreground:                      grey75
+URxvt*background:                      grey10
+URxvt*colorBD:                         orange
+URxvt*cutchars:                        ()*,<>[]{}|`""''
+URxvt*perl-lib :                       .urxvt/perl
+URxvt*perl-ext-common:                 matcher
+URxvt*matcher.button:                  1
+URxvt*colorUL:                         #3465A4
+URxvt*urlLauncher:                     firefox
+URxvt*highlightColor:                  white
+URxvt*font:                            xft:Monospace-12:style=bold
