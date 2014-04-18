@@ -11,6 +11,7 @@ Supported configuration
 * git
 * i3 (status bar with conky)
 * Xdefaults (urxvt)
+* bashrc
 
 git
 ~~~
@@ -34,3 +35,7 @@ authentification:
    USER=toto
    PASS=password
 
+bashrc
+~~~~~~
+
+You can add specifics modification by adding $HOME/.bash_spec file.
