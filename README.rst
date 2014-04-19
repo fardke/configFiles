@@ -12,6 +12,7 @@ Supported configuration
 * i3 (status bar with conky)
 * Xdefaults (urxvt)
 * bashrc
+* mutt
 
 git
 ~~~
@@ -46,3 +47,19 @@ bashrc
 ~~~~~~
 
 You can add specifics modification by adding $HOME/.bash_spec file.
+
+mutt
+~~~~
+
+You must add $HOME/.mutt/mutt.identity which contains your mail authentification:
+
+.. code-block:: linux-config
+
+        set from = "toto@mail.com"
+        set realname = "toto"
+        set imap_user = "user"
+        set imap_pass = "password"
+        set smtp_url = "smtp://user@smtp.mail.com:587/"
+        set smtp_pass = "password"
+        set folder = "imaps://imap.mail.com:993"
+
