@@ -42,6 +42,9 @@ TEXT
 {"full_text" : "home: ${fs_used_perc /home}%  root: ${fs_used_perc /}%" } ,
 {"full_text" : "  Ram" , "color" : "\#b492b6"} ,
 {"full_text" : "${memperc}%"},
+{"full_text" : "   Batt: ", "color" : "\#b72f62"},
+{"full_text" : "${battery_time}"},
+{"full_text" : "HD" , "color" : "\#7996a9"} ,
 {"full_text" : "  ${time %d %b %Y %I:%M%P}"}
 
 ],

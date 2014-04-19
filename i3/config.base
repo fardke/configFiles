@@ -33,7 +33,7 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec `dmenu_path | dmenu ${1+"$@"} -nb '$grey' -nf '$black' -sf '$pink' -sb '$blue' -fn 'terminus-8'`
+bindsym $mod+d exec `dmenu_run -nb '$grey' -nf '$black' -sf '$pink' -sb '$blue' -fn 'terminus-8'`
 
 # change focus
 bindsym $mod+h focus left
