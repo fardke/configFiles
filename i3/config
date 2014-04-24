@@ -25,7 +25,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec terminator
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -78,7 +78,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
 # toggle tiling / floating
-#bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -214,21 +214,21 @@ bindsym $mod+Shift+space move scratchpad
 bindsym $mod+space scratchpad show
 
 #autostart
-exec --no-startup-id i3-msg 'workspace 3: betty; exec terminator -e /home/kewin/bin/runMinicom;'
-exec --no-startup-id i3-msg 'workspace 1: irssi; exec terminator -e irssi;'
-exec --no-startup-id i3-msg 'workspace 9; exec terminator -e /home/kewin/bin/tunnelSsh;'
+exec --no-startup-id i3-msg 'workspace 3: betty; exec urxvtc -e /home/kewin/bin/runMinicom;'
+exec --no-startup-id i3-msg 'workspace 1: irssi; exec urxvtc -e irssi;'
+exec --no-startup-id i3-msg 'workspace 9; exec urxvtc -e /home/kewin/bin/tunnelSsh;'
 
-exec --no-startup-id i3-msg 'workspace 7: mail; exec terminator -e /home/kewin/bin/muttWork;'
-exec --no-startup-id i3-msg 'workspace 7: mail; exec terminator -e /home/kewin/bin/muttPerso;'
+exec --no-startup-id i3-msg 'workspace 7: mail; exec urxvtc -e /home/kewin/bin/muttWork;'
+exec --no-startup-id i3-msg 'workspace 7: mail; exec urxvtc -e /home/kewin/bin/muttPerso;'
 
-exec --no-startup-id i3-msg 'workspace 6: music; exec terminator -e cmus;'
-exec --no-startup-id i3-msg 'workspace 2: dev; exec terminator;'
-exec --no-startup-id i3-msg 'workspace 2: dev; exec terminator -e "'sudo /home/kewin/bin/genbox-ng;'"'
+exec --no-startup-id i3-msg 'workspace 6: music; exec urxvtc -e cmus;'
+exec --no-startup-id i3-msg 'workspace 2: dev; exec urxvtc;'
+exec --no-startup-id i3-msg 'workspace 2: dev; exec urxvtc -e "'sudo /home/kewin/bin/genbox-ng;'"'
 
 # starting a specially named term automatically 
-exec --no-startup-id terminator -T scratchpad
+exec --no-startup-id urxvtc -name scratchpad
 # # move this to scratchpad, if active
-for_window [class="Terminator" title="scratchpad"] move scratchpad
+for_window [instance="scratchpad"] move scratchpad, border 1pixel
 
 # options
 workspace_bar no
