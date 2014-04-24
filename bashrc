@@ -15,8 +15,6 @@ if [ -f $HOME/.bash_spec ] ;then
 fi
 
 export HISTCONTROL=ignoredups
-export HISTSIZE=5000
-export HISTFILESIZE=20000
 export EDITOR="vim"
 export LANG="fr_FR.UTF-8"
 
