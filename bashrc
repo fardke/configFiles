@@ -5,7 +5,7 @@
 
 PS1="[\t][\[\e[33m\]\u\[\e[32m\]@\h \[\e[1;36m\]\W\[\e[0m\]]\$ "
 if [ -d ~/bin ] ;then
- PATH=~/bin:"$PATH"
+ PATH=/usr/local/bin:~/bin:"$PATH"
 fi
 
 if [ -f /etc/bash_completion ] ;then
@@ -20,7 +20,6 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=5000
 export HISTFILESIZE=20000
 export EDITOR="vim"
-export LANG="fr_FR.UTF-8"
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
