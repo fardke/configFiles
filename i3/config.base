@@ -79,7 +79,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
 # toggle tiling / floating
-#bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -136,8 +136,12 @@ bindsym $mod+Shift+space move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+space scratchpad show
+# starting a specially named term automatically 
+exec --no-startup-id urxvtc -name scratchpad
+# # move this to scratchpad, if active
+for_window [instance="scratchpad"] move scratchpad, border 1pixel
 
-#autostart
+
 # options
 #workspace_bar no
 #new_window none
@@ -147,3 +151,6 @@ client.focused_inactive $grey $grey $black
 client.unfocused        $grey $grey $black
 client.urgent           $pink $pink $black
 client.background       $grey
+
+exec --no-startup-id twmnd
+

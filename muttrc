@@ -29,7 +29,7 @@ macro pager,index \cb |urlview\n
 
 set mailcap_path = ~/.mailcap
 
-source ~/.mutt/color
+source ~/.mutt/color256
 
 set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
 
@@ -69,7 +69,6 @@ set forward_quote=yes
 set include=yes
 set timeout=10
 set reverse_name
-set ascii_chars=yes
 set reverse_realname=yes
 set reverse_alias=yes
 set fast_reply=yes
@@ -90,3 +89,5 @@ set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
 macro index,pager a "<pipe-message>goobook add<return>" "Add the sender address to Google contacts"
 
+set charset="utf-8"
+set locale="fr_FR.UTF-8"

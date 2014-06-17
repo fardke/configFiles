@@ -61,22 +61,13 @@ bar {
         urgent_workspace #2e3436 #9a878f
     }
 }
+exec --no-startup-id i3-msg 'workspace 2: dev; exec urxvtc;'
+exec --no-startup-id i3-msg 'workspace 2: dev; exec urxvtc -e "'sudo /home/kewin/genbox/bin/genbox-ng'"'
+exec --no-startup-id i3-msg 'workspace 3: betty; exec urxvtc -e /home/kewin/bin/runMinicom;'
+exec --no-startup-id i3-msg 'workspace 1: irssi; exec urxvtc -e irssi;'
+exec --no-startup-id i3-msg 'workspace 9; exec urxvtc -e /home/kewin/bin/tunnelSsh;'
 
+exec --no-startup-id i3-msg 'workspace 7: mail; exec urxvtc -e /home/kewin/bin/muttWork;'
+exec --no-startup-id i3-msg 'workspace 7: mail; exec urxvtc -e /home/kewin/bin/muttPerso;'
 
-exec --no-startup-id i3-msg 'workspace 3: betty; exec terminator -e /home/kewin/bin/runMinicom;'
-exec --no-startup-id i3-msg 'workspace 1: irssi; exec terminator -e irssi;'
-exec --no-startup-id i3-msg 'workspace 9; exec terminator -e /home/kewin/bin/tunnelSsh;'
-
-exec --no-startup-id i3-msg 'workspace 7: mail; exec terminator -e /home/kewin/bin/muttWork;'
-exec --no-startup-id i3-msg 'workspace 7: mail; exec terminator -e /home/kewin/bin/muttPerso;'
-
-exec --no-startup-id i3-msg 'workspace 6: music; exec terminator -e cmus;'
-exec --no-startup-id i3-msg 'workspace 2: dev; exec terminator;'
-exec --no-startup-id i3-msg 'workspace 2: dev; exec terminator -e "'sudo /home/kewin/bin/genbox-ng;'"'
-
-# starting a specially named term automatically 
-exec --no-startup-id terminator -T scratchpad
-# # move this to scratchpad, if active
-for_window [class="Terminator" title="scratchpad"] move scratchpad
-
-
+exec --no-startup-id i3-msg 'workspace 6: music; exec urxvtc -e cmus;'
