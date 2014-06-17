@@ -11,4 +11,4 @@ echo '['
 echo '[],'
 
 # Now send blocks with information forever:
-exec conky -c /home/kewin/.i3/i3StatusConkyRight
+exec conky $@

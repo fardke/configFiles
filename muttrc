@@ -1,0 +1,92 @@
+source ~/.mutt/mutt.identity
+
+set spoolfile = "+INBOX"
+set postponed = "+Brouillon"
+set trash = "+Corbeille"
+set record = "+Messages envoyés"
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set move = no
+set imap_keepalive = 900
+set query_command="goobook query '%s'"
+#auto_view text/html
+
+bind pager,index \ek sidebar-prev 
+bind pager,index \eh sidebar-prev 
+bind pager,index \ej sidebar-next 
+bind pager,index \el sidebar-next 
+bind pager,index \e<return> sidebar-open 
+macro pager,index b '<enter-command>toggle sidebar_visible<enter>' 
+set imap_check_subscribed
+set sidebar_sort = yes
+set sidebar_visible=yes
+set sidebar_width=20
+
+color sidebar_new brightblue default
+
+macro pager,index \cb |urlview\n
+
+set mailcap_path = ~/.mailcap
+
+source ~/.mutt/color
+
+set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
+
+set header_cache =~/.mutt/cache/headers
+set certificate_file =~/.mutt/certificates
+set message_cachedir =~/.mutt/cache/bodies
+
+ignore *
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore CC:
+unignore BCC:
+unignore X-Mailer:
+hdr_order From: Return-Path: \
+Reply-To: \
+Date: Subject: Importance:
+
+unset arrow_cursor
+unset beep
+unset beep_new
+unset menu_scroll
+unset mark_old
+unset collapse_unread
+unset mark_old
+unset ignore_list_reply_to
+
+set narrow_tree
+set help
+set copy=yes
+set delete=yes
+set move=no
+set forward_quote=yes
+set include=yes
+set timeout=10
+set reverse_name
+set ascii_chars=yes
+set reverse_realname=yes
+set reverse_alias=yes
+set fast_reply=yes
+set confirmappend=no
+set pager_index_lines=15
+set markers
+set smart_wrap
+set pager_context=5
+set pager_stop = yes
+set status_on_top
+set sort = 'threads'
+set strict_threads
+set sort_aux = 'last-date-received'
+set tilde
+set sig_dashes
+set editor="nano -r 70 -t"
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager a "<pipe-message>goobook add<return>" "Add the sender address to Google contacts"
+

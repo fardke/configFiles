@@ -49,9 +49,7 @@ filetype plugin indent on
 " Omnicpp
 " autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
 " map <C-l> :!~/.vim/confVim<CR>
-map <C-d> :cn <CR>
-map <C-n> :DirDiffNext <CR>
-map <C-p> :DirDiffPrev <CR>
+map <C-n> :cn <CR>
 " nnoremap <silent> <F8> :TlistToggle<CR>
 
 " set tags=/tmp/tags,/tmp/tagsInc,/tmp/tagsLocalIncs
@@ -71,6 +69,10 @@ map <C-p> :DirDiffPrev <CR>
 " associate *.foo with php filetype
 au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
 au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
+au FileType rst set foldmethod=manual
+au FileType cpp set foldmethod=syntax
+au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
+au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
 
 let g:DirDiffDynamicDiffText = 1
 
@@ -80,7 +82,7 @@ let g:DirDiffDynamicDiffText = 1
 " set title
 
 set t_Co=256
-colorscheme molokai
+colorscheme wombat256
 
 set foldmethod=indent
 set rtp+=~/.vim/bundle/vundle/
