@@ -26,7 +26,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec terminator
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec /usr/bin/urxvtc
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -140,7 +140,7 @@ bindsym $mod+space scratchpad show
 #autostart
 # options
 #workspace_bar no
-new_window none
+#new_window none
 
 client.focused          $blueborder $blue $pink
 client.focused_inactive $grey $grey $black

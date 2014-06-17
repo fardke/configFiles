@@ -3,7 +3,6 @@ own_window no
 out_to_console yes
 background no
 max_text_width 0
-net_avg_samples 3
 
 # Update interval in seconds
 update_interval 2
@@ -35,16 +34,12 @@ cpu_avg_samples 1
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
 [
-{"full_text" : "   Mails: ${execi 60 /home/kewin/bin/checkNewMail}" , "color" : "\#7996a9"},
-{"full_text" : "   wlp3s0", "color" : "\#b72f62"},
-{"full_text" : "${addr wlp3s0}"},
-{"full_text" : "HD" , "color" : "\#7996a9"} ,
-{"full_text" : "home: ${fs_used_perc /home}%  root: ${fs_used_perc /}%" } ,
-{"full_text" : "  Ram" , "color" : "\#b492b6"} ,
-{"full_text" : "${memperc}%"},
-{"full_text" : "   Batt: ", "color" : "\#b72f62"},
-{"full_text" : "${battery_time}"},
-{"full_text" : "HD" , "color" : "\#7996a9"} ,
-{"full_text" : "  ${time %d %b %Y %I:%M%P}"}
-
+{"full_text" : "Mails: ${execi 60 $HOME/bin/checkGmail} ", "color" : "\#7996a9"},
+{"full_text" : " ${addr wlp3s0} ", "color" : "\#b72f62"},
+{"full_text" : " /: ${fs_used_perc /}% ", "color" : "\#7996a9"},
+{"full_text" : " Ram: ${memperc}% ", "color" : "\#b492b6"},
+${if_match "${exec cat /sys/class/power_supply/BAT0/status}"=="Charging"}{"full_text": "Batt: ${battery BAT0}" , "color" : "\#b72f62"}\
+${else}{"full_text" : " Batt: ${battery_time BAT0}", "color" : "\#b72f62"}${endif},
+#{"full_text" : " Batt: ${battery_short BAT1} ${battery_time BAT1}", "color" : "\#b72f62"},
+{"full_text" : " ${time %d %b %Y %I:%M%P}", "color" : "\#7996a9"}
 ],

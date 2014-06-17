@@ -20,6 +20,20 @@ bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
+bindsym XF86AudioRaiseVolume exec `amixer set Master 3+`
+bindsym XF86AudioLowerVolume exec `amixer set Master 3-`
+bindsym XF86AudioMute exec `amixer set Master toggle`
+bindsym XF86TouchpadToggle exec $HOME/bin/TouchpadToggle
+bindsym XF86Display exec `$HOME/bin/xrandrVGA --toggle`
+
+exec --no-startup-id twmnd
+exec --no-startup-id wicd-client -t
+exec --no-startup-id "/usr/bin/urxvtd -q -f -o"
+
+exec --no-startup-id "/usr/bin/urxvtc -name scratchpad"
+
+for_window [instance="scratchpad"] move scratchpad
+
 bar {
     status_command $HOME/bin/i3conky -c $HOME/.i3/i3StatusConkyLaptop
     workspace_buttons yes
@@ -34,6 +48,4 @@ bar {
         urgent_workspace #2e3436 #9a878f
     }
 }
-
-
 
