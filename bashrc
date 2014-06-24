@@ -26,6 +26,7 @@ alias ll='ls -l'
 alias grep='grep --color=auto'
 alias asciidoc='/usr/bin/asciidoc -n -a toc -a toclevels=4 -a max-width=55em -a icons'
 alias vi='vi -O'
+alias tree='tree -C'
 
 export TERM="rxvt-unicode-256color"
 
