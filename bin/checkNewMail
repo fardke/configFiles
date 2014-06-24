@@ -21,7 +21,7 @@ function check () {
 
 # Find number of messages unread
 function fullcount () {
-    check |  grep '<fullcount>' | sed -e 's/<fullcount>//' -e 's/<\/fullcount>//'
+    check |  grep '<fullcount>' | sed -e 's/.*<fullcount>//' -e 's/<\/fullcount>.*//'
 }
 
 # Print result
