@@ -20,6 +20,8 @@ fi
 
 export HISTCONTROL=ignoredups
 export EDITOR="vim"
+export HISTFILESIZE=
+export HISTSIZE=
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
@@ -27,7 +29,8 @@ alias grep='grep --color=auto'
 alias asciidoc='/usr/bin/asciidoc -n -a toc -a toclevels=4 -a max-width=55em -a icons'
 alias vi='vi -O'
 alias tree='tree -C'
-
+alias minicom='sudo minicom -c on -C /tmp/minicom.cap -D'
+alias python='python2.7'
 export TERM="rxvt-unicode-256color"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
