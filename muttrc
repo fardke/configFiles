@@ -1,12 +1,9 @@
 source ~/.mutt/mutt.identity
 
 set spoolfile = "+INBOX"
-set postponed = "+Brouillon"
+set postponed = "+Brouillons"
 set trash = "+Corbeille"
-set record = "+Messages envoyés"
-set header_cache = ~/.mutt/cache/headers
-set message_cachedir = ~/.mutt/cache/bodies
-set certificate_file = ~/.mutt/certificates
+set record = "+Sent"
 set move = no
 set imap_keepalive = 900
 set query_command="goobook query '%s'"
@@ -19,7 +16,7 @@ bind pager,index \el sidebar-next
 bind pager,index \e<return> sidebar-open 
 macro pager,index b '<enter-command>toggle sidebar_visible<enter>' 
 set imap_check_subscribed
-set sidebar_sort = yes
+#set sidebar_sort = yes
 set sidebar_visible=yes
 set sidebar_width=20
 
@@ -29,7 +26,7 @@ macro pager,index \cb |urlview\n
 
 set mailcap_path = ~/.mailcap
 
-source ~/.mutt/color256
+source ~/.mutt/color
 
 set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
 
@@ -82,12 +79,11 @@ set status_on_top
 set sort = 'threads'
 set strict_threads
 set sort_aux = 'last-date-received'
-set tilde
+#set tilde
 set sig_dashes
-set editor="nano -r 70 -t"
-set query_command="goobook query '%s'"
+set query_command="goobook -c ~/.mutt/.workContact query '%s'"
 bind editor <Tab> complete-query
-macro index,pager a "<pipe-message>goobook add<return>" "Add the sender address to Google contacts"
+macro index,pager a "<pipe-message>goobook ~/.mutt/.workContact add<return>" "Add the sender address to Google contacts"
 
 set charset="utf-8"
 set locale="fr_FR.UTF-8"
