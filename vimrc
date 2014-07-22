@@ -81,14 +81,17 @@ let g:DirDiffDynamicDiffText = 1
 " let &titlestring="Vim@" . hostname() . " [" . expand('%:t') . "] " . getfperm(expand('%'))
 " set title
 
-colorscheme mustang
-
 set foldmethod=indent
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
 Bundle 'Rykka/riv.vim'
 Bundle 'tomasr/molokai'
 Bundle 'smancill/conky-syntax.vim'
+call vundle#end()            " required
+
+colorscheme molokai
+set background=dark
+
