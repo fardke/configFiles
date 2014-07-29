@@ -16,9 +16,7 @@
 [diff]
     tool = default-difftool
 [difftool "default-difftool"]
-    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
-[difftool]
-    prompt = false
+    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
 [include]
     path = ~/.gituser.conf;
 [core]

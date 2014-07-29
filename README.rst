@@ -25,6 +25,8 @@ You must add a file $HOME/.gituser.conf which contain your authentification:
         name=Toto
         email=toto@mail.com
 
+.. note:: require git >= 1.7.11
+
 i3
 ~~
 
