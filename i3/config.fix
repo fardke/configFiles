@@ -1,10 +1,3 @@
-workspace $web output $monitor1
-workspace $irssi output $monitor1
-workspace $dev output $monitor2
-workspace $music output $monitor2
-workspace $mail output $monitor2
-
-
 bar {
     status_command i3blocks -c $HOME/.i3/i3BlocksRight
     workspace_buttons yes

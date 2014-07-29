@@ -30,16 +30,12 @@ You must add a file $HOME/.gituser.conf which contain your authentification:
 i3
 ~~
 
-You must add file $HOME/.checkMailIdentity.conf which contain your mail
-authentification:
+Require git@github.com:fardke/externMonitor.git .
 
-.. code-block:: linux-config
-
-   USER=toto
-   PASS=password
+You must use i3MoveWorkspace.py to place workspaces by reading .py configuration files.
 
 You must use i3ConfigMerge file at configFiles root to generate appropriate config file
-a config.base and config.fix or config.laptop merge.
+from config.base and config.fix or config.laptop merge.
 
 And each time you want to update i3 config you must modify config.base to update generic
 configuration, config.fix to update specific desktop (with 2 monitor) configuration or

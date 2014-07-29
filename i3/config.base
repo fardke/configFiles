@@ -17,9 +17,6 @@ set $blue #001F30
 set $blueborder #7996A9
 set $darkpink #b72f62
 
-set $monitor1 VGA1
-set $monitor2 HDMI3
-
 set $web "10: web"
 set $irssi "1: irssi"
 set $dev "2: dev"
