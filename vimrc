@@ -108,7 +108,7 @@ set t_Co=256
 
 " status line
 " always visible
-" set laststatus=2
+set laststatus=2
 " %f relative path
 " %m modified flag ([+] modified file)
 " %= following command are put to right
@@ -127,3 +127,7 @@ endfunction
 "undo persistant
 set undodir=~/.vim/temp_dirs/undodir
 set undofile
+
+let g:Powerline_symbols='fancy'
+let g:airline_powerline_fonts=1
+

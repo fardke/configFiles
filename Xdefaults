@@ -8,32 +8,59 @@ URxvt*perl-lib :                       .urxvt/perl
 URxvt*perl-ext-common:                 matcher
 URxvt*matcher.button:                  1
 URxvt*colorUL:                         #3465A4
-URxvt*urlLauncher:                     firefox
+URxvt*url-launcher:                    firefox
 URxvt*highlightColor:                  white
+URxvt*termName:                        rxvt-256color
+URxvt.keysym.Control-Up:               \033[1;5A
+URxvt.keysym.Control-Down:             \033[1;5B
+URxvt.keysym.Control-Left:             \033[1;5D
+URxvt.keysym.Control-Right:            \033[1;5C
 ! Fonts
-URxvt*font: xft:Monospace:pixelsize=14
-URxvt*boldFont: xft:Monospace:pixelsize=14
+! URxvt*font: xft:Monospace:pixelsize=14
+! URxvt*boldFont: xft:Monospace:pixelsize=14
+URxvt*font: xft:Terminus:pixelsize=12,xft:Inconsolata\ for\ Powerline:pixelsize=12
+! URxvt*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:pixelsize:12
+! URxvt*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:bold:pixelsize:12
+! URxvt*italicFont: xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
+! URxvt*boldItalicFont: xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=1
+URxvt*fading: 30
 !black
-*color0:    #1b1d1e
-*color8:    #505354
+# *color0:    #1b1d1e
+# *color8:    #505354
 !red
-*color1:    #f92672
-*color9:    #ff5995
+# *color1:    #f92672
+# *color9:    #ff5995
 !green
-*color2:    #82b414
-*color10:   #b6e354
+# *color2:    #82b414
+# *color10:   #b6e354
 !yellow
-*color3:    #fd971f
-*color11:   #feed6c
+# *color3:    #fd971f
+# *color11:   #feed6c
 !blue
-*color4:    #56c2d6
-*color12:   #8cedff
+# *color4:    #56c2d6
+# *color12:   #8cedff
 !magenta
-*color5:    #8c54fe
-*color13:   #9e6ffe
+# *color5:    #8c54fe
+# *color13:   #9e6ffe
 !cyan
-*color6:    #465457
-*color14:   #899ca1
+# *color6:    #465457
+# *color14:   #899ca1
 !white
-*color7:    #ccccc6
-*color15:   #f8f8f2
+# *color7:    #ccccc6
+# *color15:   #f8f8f2
+URxvt*color0:      #000000
+URxvt*color1:      #A80000
+URxvt*color2:      #00A800
+URxvt*color3:      #A85400
+URxvt*color4:      #5555AA
+URxvt*color5:      #A800A8
+URxvt*color6:      #00A8A8
+URxvt*color7:      #FFFFFF
+URxvt*color8:      #545054
+URxvt*color9:      #F85450
+URxvt*color10:     #50FC50
+URxvt*color11:     #F2FC50
+URxvt*color12:     #5054F8
+URxvt*color13:     #F854F8
+URxvt*color14:     #50FCF8
+URxvt*color15:     #F8FCF8

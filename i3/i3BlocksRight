@@ -5,50 +5,35 @@ separator=false
 separator_block_width=7
 
 [cpu]
-command=/usr/local/libexec/i3blocks/cpu_usage -w 50 -c 80
+command=/usr/libexec/i3blocks/cpu_usage -w 50 -c 80
 color=#7996A9
 interval=3
-
-[cpu-temp-pre]
-command=echo "("
-color=#7996A9
-separator_block_width=0
-
-[cpu-temp]
-command=/usr/local/libexec/i3blocks/temperature
-separator_block_width=0
-color=#825969
-interval=10
-
-[cpu-temp-post]
-command=echo ")"
-color=#7996A9
 
 [separator]
 
 [memory]
-command=/usr/local/libexec/i3blocks/memory
+command=/usr/libexec/i3blocks/memory
 color=#7996A9
 interval=20
 
 [separator]
 
 [disk-slash]
-command=/usr/local/libexec/i3blocks/disk /
+command=/usr/libexec/i3blocks/disk /
 color=#7996A9
 interval=30
 
 [separator]
 
 [disk-home]
-command=/usr/local/libexec/i3blocks/disk $HOME
+command=/usr/libexec/i3blocks/disk $HOME
 color=#7996A9
 interval=30
 
 [separator]
 
 [battery]
-command=/usr/local/libexec/i3blocks/battery
+command=/usr/libexec/i3blocks/battery
 interval=30
 color=#7996A9
 

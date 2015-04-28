@@ -32,7 +32,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec terminator
-bindsym $mod+Return exec /usr/bin/urxvtc
+bindsym $mod+Return exec /usr/bin/uxterm
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -141,6 +141,7 @@ bindsym $mod+Shift+space move scratchpad
 bindsym $mod+space scratchpad show
 # starting a specially named term automatically 
 exec --no-startup-id urxvtc -name scratchpad
+
 # # move this to scratchpad, if active
 for_window [instance="scratchpad"] move scratchpad, border 1pixel
 
@@ -149,6 +150,7 @@ client.focused_inactive $grey $grey $black
 client.unfocused        $grey $grey $black
 client.urgent           $pink $pink $black
 client.background       $grey
+
 
 bindsym $mod+ampersand workspace $irssi
 bindsym $mod+eacute workspace $dev
@@ -172,3 +174,8 @@ bindsym $mod+Shift+7 move container to workspace $mail
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace $web
+
+new_window none
+
+#mpd manage
+bindsym $mod+p exec `mpc toggle`

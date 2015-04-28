@@ -7,7 +7,8 @@ set record = "+Sent"
 set move = no
 set imap_keepalive = 900
 set query_command="goobook query '%s'"
-#auto_view text/html
+auto_view text/calendar
+auto_view text/html
 
 bind pager,index \ek sidebar-prev 
 bind pager,index \eh sidebar-prev 
@@ -20,33 +21,27 @@ set imap_check_subscribed
 set sidebar_visible=yes
 set sidebar_width=20
 
-color sidebar_new brightblue default
-
-macro pager,index \cb |urlview\n
+#macro pager \\cb <pipe-entry>urlview<enter> 'Follow links with urlview'
+macro index,pager \cb "<enter-command> set my_pdsave=\$pipe_decode<enter>\
+        <enter-command> unset pipe_decode<enter>\
+        <pipe-message>extract_url|urlview<enter>\
+        <enter-command> set pipe_decode=\$my_pdsave<enter>" "get URLs"
 
 set mailcap_path = ~/.mailcap
 
-source ~/.mutt/color
+source ~/.mutt/ivy_league.theme
 
 set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
+
+color sidebar_new color221 color233
 
 set header_cache =~/.mutt/cache/headers
 set certificate_file =~/.mutt/certificates
 set message_cachedir =~/.mutt/cache/bodies
 
 ignore *
-unignore From:
-unignore To:
-unignore Reply-To:
-unignore Mail-Followup-To:
-unignore Subject:
-unignore Date:
-unignore CC:
-unignore BCC:
-unignore X-Mailer:
-hdr_order From: Return-Path: \
-Reply-To: \
-Date: Subject: Importance:
+unignore From: To: Subject: Date: CC: Bcc:
+hdr_order Subject: Date: From: To: CC: Bcc:
 
 unset arrow_cursor
 unset beep
@@ -81,9 +76,10 @@ set strict_threads
 set sort_aux = 'last-date-received'
 #set tilde
 set sig_dashes
+set signature=~/.mutt/signature
 set query_command="goobook -c ~/.mutt/.workContact query '%s'"
 bind editor <Tab> complete-query
-macro index,pager a "<pipe-message>goobook ~/.mutt/.workContact add<return>" "Add the sender address to Google contacts"
+macro index,pager a "<pipe-message>goobook -c ~/.mutt/.workContact add<return>" "Add the sender address to Google contacts"
 
 set charset="utf-8"
 set locale="fr_FR.UTF-8"

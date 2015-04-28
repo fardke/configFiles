@@ -20,4 +20,4 @@
 [include]
     path = ~/.gituser.conf;
 [core]
-	editor = vim
+    editor = vim

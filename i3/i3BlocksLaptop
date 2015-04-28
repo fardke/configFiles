@@ -4,43 +4,22 @@ color=#b72f62
 separator=false
 separator_block_width=5
 
-[gcalcli]
-command=/usr/local/libexec/i3blocks/gcalcli kfardel@wyplay.com
-color=#825969
-
-[separator]
-
-[cpu]
-command=/usr/local/libexec/i3blocks/cpu_usage -w 50 -c 80
-color=#7996A9
-interval=3
-
-[separator]
-
-[memory]
-command=/usr/local/libexec/i3blocks/memory
-color=#7996A9
-interval=20
-
-
-[separator]
-
 [ethernet]
-command=/usr/local/libexec/i3blocks/network eth0 E
+command=/usr/libexec/i3blocks/network eth0 E
 interval=15
 color=#7996A9
 
 [separator]
 
 [wifi]
-command=/usr/local/libexec/i3blocks/network wlan0 w
+command=/usr/libexec/i3blocks/network wlan0 w
 interval=15
 color=#7996A9
 
 [separator]
 
 [battery]
-command=/usr/local/libexec/i3blocks/battery
+command=/usr/libexec/i3blocks/battery
 interval=30
 color=#7996A9
 

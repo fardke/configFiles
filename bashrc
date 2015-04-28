@@ -13,7 +13,7 @@ PATH=/sbin:"$PATH"
 if [ -f /etc/bash_completion ] ;then
     . /etc/bash_completion
 fi
-
+complete -cf sudo
 if [ -f $HOME/.bash_spec ] ;then
     . $HOME/.bash_spec
 fi
@@ -31,7 +31,7 @@ alias vi='vi -O'
 alias tree='tree -C'
 alias minicom='sudo minicom -c on -C /tmp/minicom.cap -D'
 alias python='python2.7'
-export TERM="rxvt-unicode-256color"
+export TERM="rxvt"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`

@@ -8,6 +8,7 @@ bar {
     status_command i3blocks -c $HOME/.i3/i3BlocksLaptop
     workspace_buttons yes
     position top
+    output $laptopMonitor
     tray_output $laptopMonitor
     colors {
         background $grey

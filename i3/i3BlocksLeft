@@ -4,21 +4,8 @@ color=#b72f62
 separator=false
 separator_block_width=5
 
-[gcalcli]
-command=/usr/local/libexec/i3blocks/gcalcli kfardel@wyplay.com
-color=#825969
-
-[separator]
-
-[volume]
-command=/usr/local/libexec/i3blocks/volume
-signal=10
-color=#7996A9
-
-[separator]
-
 [ethernet]
-command=/usr/local/libexec/i3blocks/network eth0 E
+command=/usr/libexec/i3blocks/network
 interval=15
 color=#7996A9
 
