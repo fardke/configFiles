@@ -3,7 +3,7 @@ filetype off
 
 set number
 set ruler
-syntax on 
+syntax on
 
 set encoding=utf-8
 let g:load_doxygen_syntax=1
@@ -11,13 +11,17 @@ set modeline
 " set autoindent
 " set cindent
 set expandtab
-set ts=8
-set sts=4
-set sw=4
-set fo+=ro
+set smarttab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+set wrap
+
+" cinoption for indentation
 set cinoptions=N-s
 
-" souri dans vim
+" souris dans vim
 set mouse=a
 
 "autocompletion  pour filename
@@ -46,52 +50,80 @@ endif
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
 
-" Omnicpp
-" autocmd BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.h set omnifunc=omni#cpp#complete#Main
-" map <C-l> :!~/.vim/confVim<CR>
+" bind ctrl +n
 map <C-n> :cn <CR>
-" nnoremap <silent> <F8> :TlistToggle<CR>
 
-" set tags=/tmp/tags,/tmp/tagsInc,/tmp/tagsLocalIncs
+nnoremap <F6> :TagbarToggle<CR>
 
-" Config taglist
-"let Tlist_Process_File_Always = 1
+" nerdtree configuration
+nnoremap <F8> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.o$']
 
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" gundo plugin configuration
+nnoremap <F5> :GundoToggle<CR>
+let g:gundo_width = 40
+let g:gundo_preview_height = 20
+let g:gundo_left = 1
 
-" associate *.foo with php filetype
+" associate .seqdiag and .blockdiag to the good filetype.
 au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
 au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
+
+" foldmethod depending of file type
+" set foldmethod=indent
 au FileType rst set foldmethod=manual
 au FileType cpp set foldmethod=syntax
+
+" if we use vim for diff bind ctrl+n ctrl+p
 au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
 au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
 
+" for dir diff
 let g:DirDiffDynamicDiffText = 1
 
-
-"titre fenetre
-" let &titlestring="Vim@" . hostname() . " [" . expand('%:t') . "] " . getfperm(expand('%'))
-" set title
-
-set foldmethod=indent
-set rtp+=~/.vim/bundle/Vundle.vim/
+" manage plugins via vundle
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 Bundle 'gmarik/vundle'
-
 Bundle 'Rykka/riv.vim'
 Bundle 'tomasr/molokai'
 Bundle 'smancill/conky-syntax.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'fardke/headers.vim'
+Bundle 'fardke/Project-Compil.vim'
+Bundle 'bling/vim-airline'
+Bundle 'Rip-Rip/clang_complete'
 call vundle#end()            " required
 
 colorscheme molokai
 set background=dark
+set spelllang=fr,en
+set spellfile=~/.vim/spellfile.add
 
+autocmd FileType mail set spell
+
+set t_Co=256
+" let g:solarized_termcolors=256
+
+" status line
+" always visible
+" set laststatus=2
+" %f relative path
+" %m modified flag ([+] modified file)
+" %= following command are put to right
+" %y file type
+" %r readonly
+" set statusline=\ %{HasPaste()}\ %<%r%f%m%=%y\ Line:\ %l\/%L
+
+" Returns string if paste mode
+function! HasPaste()
+    if &paste
+        return 'COLLAGE'
+    end
+    return ''
+endfunction
+
+"undo persistant
+set undodir=~/.vim/temp_dirs/undodir
+set undofile
