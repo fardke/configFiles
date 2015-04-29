@@ -94,6 +94,7 @@ Bundle 'fardke/headers.vim'
 Bundle 'fardke/Project-Compil.vim'
 Bundle 'bling/vim-airline'
 Bundle 'Rip-Rip/clang_complete'
+Bundle 'tpope/vim-fugitive'
 call vundle#end()            " required
 
 colorscheme molokai
