@@ -18,12 +18,13 @@ URxvt.keysym.Control-Right:            \033[1;5C
 ! Fonts
 ! URxvt*font: xft:Monospace:pixelsize=14
 ! URxvt*boldFont: xft:Monospace:pixelsize=14
-URxvt*font: xft:Terminus:pixelsize=12,xft:Inconsolata\ for\ Powerline:pixelsize=12
+! URxvt*font: xft:Terminus:pixelsize=12,xft:Inconsolata\ for\ Powerline:pixelsize=14
+URxvt*font: xft:Anonymice\ Powerline:size=11
 ! URxvt*font: -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:pixelsize:12
 ! URxvt*boldFont: -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:bold:pixelsize:12
 ! URxvt*italicFont: xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
 ! URxvt*boldItalicFont: xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=1
-URxvt*fading: 30
+! URxvt*fading: 30
 !black
 # *color0:    #1b1d1e
 # *color8:    #505354
