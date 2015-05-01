@@ -1,0 +1,3 @@
+config_files='["/home/kewin/configFiles/i3/config.base","/home/kewin/configFiles/i3/config.fix"]'
+workspace_mapping='{"1: irssi":"VGA1","2: dev":"HDMI3","6: music":"HDMI3","7: mail":"HDMI3","9":"VGA1","10: web":"VGA1"}'
+variables='[{"name":"$monitor1", "value":"VGA1"}, {"name":"$monitor2","value":"HDMI3"}]'
