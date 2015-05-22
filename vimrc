@@ -97,6 +97,7 @@ Bundle 'Rip-Rip/clang_complete'
 Bundle 'tpope/vim-fugitive'
 Bundle 'szw/seoul256.vim'
 Bundle 'hdima/python-syntax'
+Bundle 'nblock/vim-dokuwiki'
 call vundle#end()            " required
 
 set spelllang=fr,en
