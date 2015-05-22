@@ -95,10 +95,10 @@ Bundle 'fardke/Project-Compil.vim'
 Bundle 'bling/vim-airline'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'tpope/vim-fugitive'
+Bundle 'szw/seoul256.vim'
+Bundle 'hdima/python-syntax'
 call vundle#end()            " required
 
-colorscheme molokai
-set background=dark
 set spelllang=fr,en
 set spellfile=~/.vim/spellfile.add
 
@@ -131,4 +131,15 @@ set undofile
 
 let g:Powerline_symbols='fancy'
 let g:airline_powerline_fonts=1
+let g:airline_theme='luna'
+
+" configure theme
+let g:seoul256_background=233
+set background=dark
+colorscheme seoul256
+
+" tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 
