@@ -92,12 +92,13 @@ Bundle 'smancill/conky-syntax.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'fardke/headers.vim'
 Bundle 'fardke/Project-Compil.vim'
-Bundle 'bling/vim-airline'
-Bundle 'Rip-Rip/clang_complete'
+" Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'szw/seoul256.vim'
 Bundle 'hdima/python-syntax'
 Bundle 'nblock/vim-dokuwiki'
+Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'msanders/snipmate.vim'
 call vundle#end()            " required
 
 set spelllang=fr,en
@@ -106,7 +107,6 @@ set spellfile=~/.vim/spellfile.add
 autocmd FileType mail set spell
 
 set t_Co=256
-" let g:solarized_termcolors=256
 
 " status line
 " always visible
@@ -144,3 +144,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 
+" completion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+set path=**,/home/kewin/genbox/target/current/root/usr/include
