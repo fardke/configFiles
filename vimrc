@@ -1,114 +1,63 @@
-set nocompatible
-filetype off
-
-set number
-set ruler
+"""""""""""""""""""""""""""""""""""""""""""
+""""""""" Configuration generale """"""""""
+"""""""""""""""""""""""""""""""""""""""""""
+set nocp
+filetype plugin on
 syntax on
 
-set encoding=utf-8
-let g:load_doxygen_syntax=1
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
+set number
+
 set modeline
-" set autoindent
-" set cindent
-set expandtab
-set smarttab
-set tabstop=4
-set shiftwidth=4
 set autoindent
 set smartindent
-set wrap
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
-" cinoption for indentation
-set cinoptions=N-s
-
-" souris dans vim
+" Souris dans vim
 set mouse=a
 
-"autocompletion  pour filename
+" Autocompletion  pour filename
 set wildmode=longest,full
 set wildmenu
 
-
-"Couleur pour les templates
+" Couleur pour les templates
 hi def link Todo TODO
 syn keyword Todo TODO FIXME XXX DEBUG
 
-" Searching
+" Recherche
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-" Remember last location in file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
-endif
+" Afficher tabulation et espaces
+set list
+set listchars=tab:>⋅,trail:⋅,nbsp:⋅
 
-" au FileType make set noexpandtab
-
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
-" bind ctrl +n
-map <C-n> :cn <CR>
-
-nnoremap <F6> :TagbarToggle<CR>
-
-" nerdtree configuration
-nnoremap <F8> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.o$']
-
-" gundo plugin configuration
-nnoremap <F5> :GundoToggle<CR>
-let g:gundo_width = 40
-let g:gundo_preview_height = 20
-let g:gundo_left = 1
-
-" associate .seqdiag and .blockdiag to the good filetype.
-au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
-au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
-
-" foldmethod depending of file type
-" set foldmethod=indent
+" Foldmethod depent du type de fichier
 au FileType rst set foldmethod=manual
 au FileType cpp set foldmethod=syntax
 
-" if we use vim for diff bind ctrl+n ctrl+p
-au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
-au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
+" Persistence fold
+au BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
+au BufWinEnter *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst silent loadview
 
-" for dir diff
-let g:DirDiffDynamicDiffText = 1
-
-" manage plugins via vundle
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
-
-Bundle 'gmarik/vundle'
-Bundle 'Rykka/riv.vim'
-Bundle 'tomasr/molokai'
-Bundle 'smancill/conky-syntax.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'fardke/headers.vim'
-Bundle 'fardke/Project-Compil.vim'
-" Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'szw/seoul256.vim'
-Bundle 'hdima/python-syntax'
-Bundle 'nblock/vim-dokuwiki'
-Bundle 'vim-scripts/OmniCppComplete'
-Bundle 'msanders/snipmate.vim'
-call vundle#end()            " required
-
+" Ajout dictionnaires francais anglais.
 set spelllang=fr,en
 set spellfile=~/.vim/spellfile.add
 
-autocmd FileType mail set spell
+" Verifier l'orthographe pour les mails.
+au FileType mail,txt set spell
 
+" Supporter 256 couleurs.
 set t_Co=256
 
-" status line
+" Ligne status.
 " always visible
 set laststatus=2
 " %f relative path
@@ -116,7 +65,7 @@ set laststatus=2
 " %= following command are put to right
 " %y file type
 " %r readonly
-" set statusline=\ %{HasPaste()}\ %<%r%f%m%=%y\ Line:\ %l\/%L
+set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ %=%y\ Line:\ %l\/%L
 
 " Returns string if paste mode
 function! HasPaste()
@@ -126,25 +75,152 @@ function! HasPaste()
     return ''
 endfunction
 
-"undo persistant
+
+"""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""" Plugins """""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+
+" Plugin pour gerer les Plugins
+Bundle 'gmarik/vundle'
+
+" Plugin pour etre plus efficace en rst
+Bundle 'Rykka/riv.vim'
+
+" Plugin pour avoir un undo persistent
+Bundle 'sjl/gundo.vim'
+
+" Plugin pour ajouter automatiquement une en tete a des fichiers
+Bundle 'fardke/headers.vim'
+
+" Plugin pour transformer vim en ide c++
+Bundle 'fardke/Project-Compil.vim'
+
+" Plugin pour afficher des infos git dans vim
+Bundle 'tpope/vim-fugitive'
+
+" Theme molokai
+Bundle 'tomasr/molokai'
+
+" Theme seoul
+Bundle 'szw/seoul256.vim'
+
+" Theme wombat 256
+Bundle 'vim-scripts/wombat256.vim'
+
+" Theme skittles_berry
+Bundle 'shawncplus/skittles_berry'
+
+" Plugin pour reconnaitre la syntax python
+Bundle 'hdima/python-syntax'
+
+" Plugin pour reconnaitre la syntax dokuwiki
+Bundle 'nblock/vim-dokuwiki'
+
+" Plugin pour reconnaitre la syntax tmux
+Bundle 'tejr/vim-tmux'
+
+" Plugin pour les snipets
+Bundle 'msanders/snipmate.vim'
+
+" Plugin pour afficher la lists des tags
+Bundle 'vim-scripts/taglist.vim'
+
+" Plugin pour afficher un explorateur de fichier dans vim
+Bundle 'scrooloose/nerdtree'
+
+" Plugin pour switcher des .h aux .cpp.
+Bundle 'vim-scripts/a.vim'
+
+" Plugin pour avoir l'autocompletion via clang.
+Bundle 'Valloric/YouCompleteMe'
+
+" Plugin pour faire des diff all
+Bundle 'vim-scripts/DirDiff.vim'
+
+call vundle#end()            " required
+
+"""""""""""""""""""""""""""""""""""""""""""
+"""""""" Configuration Plugins """"""""""""
+"""""""""""""""""""""""""""""""""""""""""""
+
+" NerdTree
+let NERDTreeIgnore=['\.o$']
+
+" Gundo
+let g:gundo_width = 40
+let g:gundo_preview_height = 20
+let g:gundo_left = 1
+
+" Associer .seqdiag et .blockdiag au bon type de fichier.
+au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
+au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
+
+" Undo persistant
 set undodir=~/.vim/temp_dirs/undodir
 set undofile
 
-let g:Powerline_symbols='fancy'
-let g:airline_powerline_fonts=1
-let g:airline_theme='luna'
-
-" configure theme
+" Configure theme
 let g:seoul256_background=233
 set background=dark
-colorscheme seoul256
+colorscheme wombat256mod
 
-" tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+" Tag list
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+let Tlist_Process_File_Always = 1
+let Tlist_Show_One_File = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Highlight_Tag_On_BufEnter = 1
+let Tlist_Display_Prototype = 1
+let Tlist_Exit_OnlyWindow = 1 
 
-" completion
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-set path=**,/home/kewin/genbox/target/current/root/usr/include
+" Plugin a-vim.
+" Pour changer entre le .c/.h, on spécifie nos dossiers d'inclusions persos
+let g:alternateSearchPath = 'inc/:include/:/usr/targets/current/root/usr/include/'
+
+" Plugin dir diff
+let g:DirDiffDynamicDiffText = 1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""" Bindings """""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""
+
+" Lancer nerdtree F8
+nnoremap <F8> :NERDTreeToggle<CR>
+
+" Lancer gundo
+nnoremap <F5> :GundoToggle<CR>
+
+" Bind ctrl +n
+map <C-n> :cn <CR>
+
+" Bind ctrl +p
+map <C-p> :cn <CR>
+
+" Bind ctrl n et ctrl p pour passer a la prochaine diff dans le cas ou c est
+" un diff.
+au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
+au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
+au FilterWritePre * if &diff | colorscheme desert | endif
+" Lancer tlist F6
+nnoremap <silent> <F6> :TlistToggle<CR>
+
+" Switcher .h/.c F4
+map <F4> <Esc>:A<CR>
+
+" Aller a l'onglet precedent
+nnoremap <C-Left> :tabprevious<CR>
+
+" Aller a l'onglet suivant
+nnoremap <C-Right> :tabnext<CR>
+
+" Fermer l'onglet courant
+nnoremap <C-c> :tabclose<CR> 
+
+" Ouvrir un nouvel onglet
+nnoremap <C-t> :tabnew<CR>
