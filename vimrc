@@ -2,7 +2,6 @@
 """"""""" Configuration generale """"""""""
 """""""""""""""""""""""""""""""""""""""""""
 set nocp
-filetype plugin on
 syntax on
 
 set enc=utf-8
@@ -87,7 +86,7 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 
 " Plugin pour etre plus efficace en rst
-Bundle 'Rykka/riv.vim'
+" Bundle 'Rykka/riv.vim'
 
 " Plugin pour avoir un undo persistent
 Bundle 'sjl/gundo.vim'
@@ -122,8 +121,11 @@ Bundle 'nblock/vim-dokuwiki'
 " Plugin pour reconnaitre la syntax tmux
 Bundle 'tejr/vim-tmux'
 
-" Plugin pour les snipets
-Bundle 'msanders/snipmate.vim'
+" Plugin pour la gestion snipets
+Bundle 'SirVer/ultisnips'
+
+" Repo pour les snipets
+Bundle 'fardke/vim-snippets'
 
 " Plugin pour afficher la lists des tags
 Bundle 'vim-scripts/taglist.vim'
@@ -146,6 +148,8 @@ call vundle#end()            " required
 """""""" Configuration Plugins """"""""""""
 """""""""""""""""""""""""""""""""""""""""""
 
+filetype plugin on
+
 " NerdTree
 let NERDTreeIgnore=['\.o$']
 
@@ -163,8 +167,6 @@ set undodir=~/.vim/temp_dirs/undodir
 set undofile
 
 " Configure theme
-let g:seoul256_background=233
-set background=dark
 colorscheme wombat256mod
 
 " Tag list
@@ -175,7 +177,7 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 let Tlist_Display_Prototype = 1
-let Tlist_Exit_OnlyWindow = 1 
+let Tlist_Exit_OnlyWindow = 1
 
 " Plugin a-vim.
 " Pour changer entre le .c/.h, on spécifie nos dossiers d'inclusions persos
@@ -184,17 +186,39 @@ let g:alternateSearchPath = 'inc/:include/:/usr/targets/current/root/usr/include
 " Plugin dir diff
 let g:DirDiffDynamicDiffText = 1
 
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="/home/kewin/.vim/bundle/vim-snippets/UltiSnips/"
 
 
 """""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""" Bindings """""""""""""""
 """""""""""""""""""""""""""""""""""""""""""
 
-" Lancer nerdtree F8
-nnoremap <F8> :NERDTreeToggle<CR>
+" Switcher .h/.c F4
+nnoremap <F4> :A<CR>
+inoremap <F4> <ESC>:A<CR>
 
 " Lancer gundo
 nnoremap <F5> :GundoToggle<CR>
+inoremap <F5> <ESC>:GundoToggle<CR>
+
+" Lancer tlist F6
+nnoremap <F6> :TlistToggle<CR>
+inoremap <F6> <ESC>:TlistToggle<CR>
+
+" Lancer nerdtree F8
+nnoremap <F8> :NERDTreeToggle<CR>
+inoremap <F8> <ESC>:NERDTreeToggle<CR>
+
+" Lancer snippet edition
+nnoremap <F11> :UltiSnipsEdit<CR>
+inoremap <F11> <ESC>:UltiSnipsEdit<CR>
 
 " Bind ctrl +n
 map <C-n> :cn <CR>
@@ -207,11 +231,6 @@ map <C-p> :cn <CR>
 au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
 au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
 au FilterWritePre * if &diff | colorscheme desert | endif
-" Lancer tlist F6
-nnoremap <silent> <F6> :TlistToggle<CR>
-
-" Switcher .h/.c F4
-map <F4> <Esc>:A<CR>
 
 " Aller a l'onglet precedent
 nnoremap <C-Left> :tabprevious<CR>
@@ -224,3 +243,4 @@ nnoremap <C-c> :tabclose<CR>
 
 " Ouvrir un nouvel onglet
 nnoremap <C-t> :tabnew<CR>
+
