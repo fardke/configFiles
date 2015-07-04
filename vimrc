@@ -10,22 +10,14 @@ set termencoding=utf-8
 
 set number
 
-filetype on
-filetype indent on
-set cindent
 " :0 case at same level than switch
 " g0 public, protected, private at same level than calss
 " (0 when we jump next line in parameter we will be at same level than opened (
 " N-s we are at same level than { in a namespace.
 set cinoptions=:0g0(0N-s
 
-set modeline
-set autoindent
-set smartindent
-set expandtab
-set tabstop=4
-set shiftwidth=4
 set backspace=indent,eol,start
+
 
 " Souris dans vim
 set mouse=a
@@ -48,20 +40,11 @@ set smartcase
 set list
 set listchars=tab:>⋅,trail:⋅,nbsp:⋅
 
-" Foldmethod depent du type de fichier
-au FileType rst set foldmethod=manual
-au FileType cpp set foldmethod=syntax
-
-" Persistence fold
-au BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
-au BufWinEnter *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst silent loadview
-
 " Ajout dictionnaires francais anglais.
 set spelllang=fr,en
 set spellfile=~/.vim/spellfile.add
 
 " Verifier l'orthographe pour les mails.
-au FileType mail,txt set spell
 
 " Supporter 256 couleurs.
 set t_Co=256
@@ -76,13 +59,16 @@ set laststatus=2
 " %r readonly
 set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ %=%y\ Line:\ %l\/%L
 
-" Returns string if paste mode
-function! HasPaste()
-    if &paste
-        return 'COLLAGE'
-    end
-    return ''
-endfunction
+
+" Autocommand
+autocmd FileType mail,txt set spell
+autocmd FileType cpp call FT_cpp()
+" Foldmethod depent du type de fichier
+autocmd FileType rst set foldmethod=manual
+
+" Persistence fold
+autocmd BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
+autocmd BufWinEnter *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst silent loadview
 
 
 """""""""""""""""""""""""""""""""""""""""""
@@ -254,3 +240,41 @@ nnoremap <C-Right> :tabnext<CR>
 
 " Fermer l'onglet courant
 nnoremap <C-c> :tabclose<CR> 
+
+" Ouvrir un nouvel onglet
+nnoremap <C-t> :tabnew<CR>
+
+" leader touch ,
+let mapleader = ","
+
+" raccourci pour ouvrir vimrc dans un nouvel onglet
+nmap <leader>v :tabedit /home/kewin/.vimrc<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""" Functions """""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""
+
+"auto sourcing when save vimrc
+if has("autocmd")
+        autocmd bufwritepost .vimrc source /home/kewin/.vimrc
+endif
+
+" Returns string if paste mode
+function! HasPaste()
+    if &paste
+        return 'COLLAGE'
+    end
+    return ''
+endfunction
+
+function! FT_cpp()
+    set foldmethod=syntax
+    set shiftwidth=4
+    set tabstop=4
+    " the textwidth is used for formatting the comments
+    set textwidth=80
+    set colorcolumn=80
+    set autoindent
+    set cindent
+    set nospell
+endfunction
