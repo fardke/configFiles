@@ -10,12 +10,22 @@ set termencoding=utf-8
 
 set number
 
+filetype on
+filetype indent on
+set cindent
+" :0 case at same level than switch
+" g0 public, protected, private at same level than calss
+" (0 when we jump next line in parameter we will be at same level than opened (
+" N-s we are at same level than { in a namespace.
+set cinoptions=:0g0(0N-s
+
 set modeline
 set autoindent
 set smartindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set backspace=indent,eol,start
 
 " Souris dans vim
 set mouse=a
@@ -182,6 +192,7 @@ let Tlist_Exit_OnlyWindow = 1
 " Plugin a-vim.
 " Pour changer entre le .c/.h, on spécifie nos dossiers d'inclusions persos
 let g:alternateSearchPath = 'inc/:include/:/usr/targets/current/root/usr/include/'
+let g:alernateExtensions_cpp = "h,inc,H,HPP,hpp"
 
 " Plugin dir diff
 let g:DirDiffDynamicDiffText = 1
@@ -194,6 +205,9 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="/home/kewin/.vim/bundle/vim-snippets/UltiSnips/"
+
+let g:ycm_global_ycm_extra_conf = '/home/kewin/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""
@@ -240,7 +254,3 @@ nnoremap <C-Right> :tabnext<CR>
 
 " Fermer l'onglet courant
 nnoremap <C-c> :tabclose<CR> 
-
-" Ouvrir un nouvel onglet
-nnoremap <C-t> :tabnew<CR>
-
