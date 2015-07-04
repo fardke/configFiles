@@ -1,85 +1,137 @@
 source ~/.mutt/mutt.identity
 
+# basic options
+set wait_key = no        # shut up, mutt
+set timeout = 3          # idle time before scanning
+set mail_check = 10       # minimum time between scans
+unset move               # gmail does that
+unset mark_old           # read/new is good enough for me
+set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+set tilde
+set mailcap_path = ~/.mailcap
+set signature=~/.mutt/signature
+
+# Path
 set spoolfile = "+INBOX"
 set postponed = "+Brouillons"
 set trash = "+Corbeille"
 set record = "+Sent"
-set move = no
+set header_cache =~/.mutt/cache/headers
+set certificate_file =~/.mutt/certificates
+set message_cachedir =~/.mutt/cache/bodies
+
+# config imap
 set imap_keepalive = 900
-set query_command="goobook query '%s'"
+set imap_check_subscribed
+
+# autoview
 auto_view text/calendar
 auto_view text/html
 
+# sidebar
+#set sidebar_sort = yes
+set sidebar_visible=yes
+set sidebar_width=20
+color sidebar_new color221 color233
+set sidebar_format = "%B %> %S"
+
+# editor
+set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
+
+# headers
+ignore *
+unignore From: To: CC: Date: Subject:
+hdr_order From: To: CC: Date: Subject:
+
+set charset="utf-8"
+set locale="fr_FR.UTF-8"
+
+# status bar
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# index view option
+set date_format = "%d/%m"
+set index_format = "%D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set folder_format = "%2C %t %N %8s %f"
+
+# Pager View Options {{{
+#
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+# Compose View Options
+set envelope_from                    # which from?
+set sig_dashes                       # dashes before sig
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+
+# Attachment View Options
+set attach_format = "[%D %t] %2n [%-7.7m/%10.10M] %.40d %> [%s] "
+
+# contact management
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager a "<pipe-message>goobook add<return>" "Add the sender address to Google contacts"
+
+# color
+source ~/.mutt/colors.muttrc
+
+# keymap
 bind pager,index \ek sidebar-prev 
 bind pager,index \eh sidebar-prev 
 bind pager,index \ej sidebar-next 
 bind pager,index \el sidebar-next 
 bind pager,index \e<return> sidebar-open 
+
 macro pager,index b '<enter-command>toggle sidebar_visible<enter>' 
-set imap_check_subscribed
-#set sidebar_sort = yes
-set sidebar_visible=yes
-set sidebar_width=20
 
-#macro pager \\cb <pipe-entry>urlview<enter> 'Follow links with urlview'
-macro index,pager \cb "<enter-command> set my_pdsave=\$pipe_decode<enter>\
-        <enter-command> unset pipe_decode<enter>\
-        <pipe-message>extract_url|urlview<enter>\
-        <enter-command> set pipe_decode=\$my_pdsave<enter>" "get URLs"
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
-set mailcap_path = ~/.mailcap
+bind index \#       noop
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index k        previous-entry
+bind index j        next-entry
+bind index gg       first-entry
+bind index G        last-entry
+bind index p        recall-message
+bind index <space>  collapse-thread
+bind index N        search-opposite
 
-source ~/.mutt/ivy_league.theme
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
 
-set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
+bind pager \# noop
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+bind pager R  group-reply
+bind pager N  search-opposite
 
-color sidebar_new color221 color233
+# Mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
 
-set header_cache =~/.mutt/cache/headers
-set certificate_file =~/.mutt/certificates
-set message_cachedir =~/.mutt/cache/bodies
-
-ignore *
-unignore From: To: Subject: Date: CC: Bcc:
-hdr_order Subject: Date: From: To: CC: Bcc:
-
-unset arrow_cursor
-unset beep
-unset beep_new
-unset menu_scroll
-unset mark_old
-unset collapse_unread
-unset mark_old
-unset ignore_list_reply_to
-
-set narrow_tree
-set help
-set copy=yes
-set delete=yes
-set move=no
-set forward_quote=yes
-set include=yes
-set timeout=10
-set reverse_name
-set reverse_realname=yes
-set reverse_alias=yes
-set fast_reply=yes
-set confirmappend=no
-set pager_index_lines=15
-set markers
-set smart_wrap
-set pager_context=5
-set pager_stop = yes
-set status_on_top
-set sort = 'threads'
-set strict_threads
-set sort_aux = 'last-date-received'
-#set tilde
-set sig_dashes
-set signature=~/.mutt/signature
-set query_command="goobook -c ~/.mutt/.workContact query '%s'"
-bind editor <Tab> complete-query
-macro index,pager a "<pipe-message>goobook -c ~/.mutt/.workContact add<return>" "Add the sender address to Google contacts"
-
-set charset="utf-8"
-set locale="fr_FR.UTF-8"
