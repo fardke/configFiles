@@ -10,14 +10,6 @@ set termencoding=utf-8
 
 set number
 
-" :0 case at same level than switch
-" g0 public, protected, private at same level than calss
-" (0 when we jump next line in parameter we will be at same level than opened (
-" N-s we are at same level than { in a namespace.
-set cinoptions=:0g0(0N-s
-
-set backspace=indent,eol,start
-
 
 " Souris dans vim
 set mouse=a
@@ -59,10 +51,12 @@ set laststatus=2
 " %r readonly
 set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ %=%y\ Line:\ %l\/%L
 
+filetype plugin indent on
 
 " Autocommand
 autocmd FileType mail,txt set spell
 autocmd FileType cpp call FT_cpp()
+
 " Foldmethod depent du type de fichier
 autocmd FileType rst set foldmethod=manual
 
@@ -269,12 +263,17 @@ endfunction
 
 function! FT_cpp()
     set foldmethod=syntax
+    set expandtab
     set shiftwidth=4
-    set tabstop=4
+    set softtabstop=4
     " the textwidth is used for formatting the comments
     set textwidth=80
     set colorcolumn=80
-    set autoindent
-    set cindent
     set nospell
+    " :0 case at same level than switch
+    " g0 public, protected, private at same level than calss
+    " (0 when we jump next line in parameter we will be at same level than opened (
+    " N-s we are at same level than { in a namespace.
+    set cinoptions=:0g0(0N-s
+    set backspace=indent,eol,start
 endfunction
