@@ -11,10 +11,13 @@ URxvt*colorUL:                         #3465A4
 URxvt*url-launcher:                    firefox
 URxvt*highlightColor:                  white
 URxvt*termName:                        rxvt-256color
-URxvt.keysym.Control-Up:               \033[1;5A
-URxvt.keysym.Control-Down:             \033[1;5B
-URxvt.keysym.Control-Left:             \033[1;5D
-URxvt.keysym.Control-Right:            \033[1;5C
+URxvt*keysym.Control-Up:               \033[1;5A
+URxvt*keysym.Control-Down:             \033[1;5B
+URxvt*keysym.Control-Left:             \033[1;5D
+URxvt*keysym.Control-Right:            \033[1;5C
+URxvt*borderless:		       true
+URxvt*internalBorder: 		       5
+URxvt*externalBorder: 		       0
 ! Fonts
 ! URxvt*font: xft:Monospace:pixelsize=14
 ! URxvt*boldFont: xft:Monospace:pixelsize=14
