@@ -51,11 +51,14 @@ set laststatus=2
 " %r readonly
 set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ %=%y\ Line:\ %l\/%L
 
+set rtp+=$HOME/devNotOnBoard/powerline/powerline/bindings/vim
+
 filetype plugin indent on
 
 " Autocommand
 autocmd FileType mail,txt set spell
 autocmd FileType cpp call FT_cpp()
+autocmd FileType lua call FT_lua()
 
 " Foldmethod depent du type de fichier
 autocmd FileType rst set foldmethod=manual
@@ -276,4 +279,10 @@ function! FT_cpp()
     " N-s we are at same level than { in a namespace.
     set cinoptions=:0g0(0N-s
     set backspace=indent,eol,start
+endfunction
+
+function! FT_lua()
+    set expandtab
+    set shiftwidth=8
+    set softtabstop=8
 endfunction
