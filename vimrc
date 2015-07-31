@@ -58,6 +58,7 @@ filetype plugin indent on
 " Autocommand
 autocmd FileType mail,txt set spell
 autocmd FileType cpp call FT_cpp()
+autocmd FileType arduino call FT_arduino()
 autocmd FileType lua call FT_lua()
 
 " Foldmethod depent du type de fichier
@@ -134,6 +135,12 @@ Bundle 'Valloric/YouCompleteMe'
 
 " Plugin pour faire des diff all
 Bundle 'vim-scripts/DirDiff.vim'
+
+" Plugin pour compiler direct pour arduino
+Bundle 'jplaut/vim-arduino-ino'
+
+" Plugin pour la syntax des fichiers specifiques arduino
+Bundle 'sudar/vim-arduino-syntax'
 
 call vundle#end()            " required
 
@@ -285,4 +292,10 @@ function! FT_lua()
     set expandtab
     set shiftwidth=8
     set softtabstop=8
+endfunction
+
+function! FT_arduino()
+    set expandtab
+    set shiftwidth=4
+    set softtabstop=4
 endfunction
