@@ -35,7 +35,6 @@ auto_view text/html
 set sidebar_visible=yes
 set sidebar_width=20
 color sidebar_new color221 color233
-set sidebar_format = "%B %> %S"
 
 # editor
 set editor="vim -c 'set spell spelllang=fr' -c 'set tw=72'"
@@ -134,4 +133,5 @@ bind pager N  search-opposite
 
 # Mark all as read
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
-
+# all thread collapsed by default
+folder-hook . "exec collapse-all"
