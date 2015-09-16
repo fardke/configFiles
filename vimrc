@@ -10,13 +10,17 @@ set termencoding=utf-8
 
 set number
 
+set expandtab
+set shiftwidth=4
+set softtabstop=4
 
 " Souris dans vim
 set mouse=a
 
 " Autocompletion  pour filename
-set wildmode=longest,full
+set wildmode=longest,list,full
 set wildmenu
+set wildignore+=*.o,*.obj,*.ko,*.so,*.mod.c,*.pyc,*.DS_Store,*.db " Hide irrelevent matches
 
 " Couleur pour les templates
 hi def link Todo TODO
@@ -29,8 +33,8 @@ set ignorecase
 set smartcase
 
 " Afficher tabulation et espaces
-set list
 set listchars=tab:>⋅,trail:⋅,nbsp:⋅
+set list
 
 " Ajout dictionnaires francais anglais.
 set spelllang=fr,en
@@ -41,6 +45,9 @@ set spellfile=~/.vim/spellfile.add
 " Supporter 256 couleurs.
 set t_Co=256
 
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
 " Ligne status.
 " always visible
 set laststatus=2
@@ -49,24 +56,25 @@ set laststatus=2
 " %= following command are put to right
 " %y file type
 " %r readonly
-set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ %=%y\ Line:\ %l\/%L
+set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ \%{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%y\ Line:\ %l\/%L
 
-set rtp+=$HOME/devNotOnBoard/powerline/powerline/bindings/vim
+" set rtp+=$HOME/devNotOnBoard/powerline/powerline/bindings/vim
 
 filetype plugin indent on
 
 " Autocommand
 autocmd FileType mail,txt set spell
-autocmd FileType cpp call FT_cpp()
+autocmd FileType cpp,hpp,h call FT_cpp()
 autocmd FileType lua call FT_lua()
-
-" Foldmethod depent du type de fichier
-autocmd FileType rst set foldmethod=manual
+autocmd FileType markdown call FT_markdown()
+autocmd FileType rst call FT_rst()
 
 " Persistence fold
 autocmd BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
 autocmd BufWinEnter *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst silent loadview
 
+" last position jump.
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 """""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""" Plugins """""""""""""""""
@@ -93,16 +101,11 @@ Bundle 'fardke/Project-Compil.vim'
 " Plugin pour afficher des infos git dans vim
 Bundle 'tpope/vim-fugitive'
 
-" Theme molokai
+" colorscheme
 Bundle 'tomasr/molokai'
-
-" Theme seoul
 Bundle 'szw/seoul256.vim'
-
-" Theme wombat 256
 Bundle 'vim-scripts/wombat256.vim'
-
-" Theme skittles_berry
+Bundle 'twerth/ir_black'
 Bundle 'shawncplus/skittles_berry'
 
 " Plugin pour reconnaitre la syntax python
@@ -128,9 +131,6 @@ Bundle 'scrooloose/nerdtree'
 
 " Plugin pour switcher des .h aux .cpp.
 Bundle 'vim-scripts/a.vim'
-
-" Plugin pour avoir l'autocompletion via clang.
-Bundle 'Valloric/YouCompleteMe'
 
 " Plugin pour faire des diff all
 Bundle 'vim-scripts/DirDiff.vim'
@@ -160,7 +160,7 @@ set undodir=~/.vim/temp_dirs/undodir
 set undofile
 
 " Configure theme
-colorscheme wombat256mod
+colorscheme skittles_berry
 
 " Tag list
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
@@ -188,10 +188,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="/home/kewin/.vim/bundle/vim-snippets/UltiSnips/"
-
-let g:ycm_global_ycm_extra_conf = '/home/kewin/.vim/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-
 
 """""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""" Bindings """""""""""""""
@@ -221,7 +217,7 @@ inoremap <F11> <ESC>:UltiSnipsEdit<CR>
 map <C-n> :cn <CR>
 
 " Bind ctrl +p
-map <C-p> :cn <CR>
+map <C-p> :cp <CR>
 
 " Bind ctrl n et ctrl p pour passer a la prochaine diff dans le cas ou c est
 " un diff.
@@ -238,14 +234,17 @@ nnoremap <C-Right> :tabnext<CR>
 " Fermer l'onglet courant
 nnoremap <C-c> :tabclose<CR> 
 
-" Ouvrir un nouvel onglet
-nnoremap <C-t> :tabnew<CR>
-
 " leader touch ,
 let mapleader = ","
 
 " raccourci pour ouvrir vimrc dans un nouvel onglet
 nmap <leader>v :tabedit /home/kewin/.vimrc<CR>
+
+" switch easily between splits
+map <C-h> <C-w>h<C-w>=
+map <C-l> <C-w>l<C-w>=
+map <C-j> <C-w>j<C-w>=
+map <C-k> <C-w>k<C-w>=
 
 """""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Functions """""""""""""""""
@@ -266,9 +265,6 @@ endfunction
 
 function! FT_cpp()
     set foldmethod=syntax
-    set expandtab
-    set shiftwidth=4
-    set softtabstop=4
     " the textwidth is used for formatting the comments
     set textwidth=80
     set colorcolumn=80
@@ -279,6 +275,15 @@ function! FT_cpp()
     " N-s we are at same level than { in a namespace.
     set cinoptions=:0g0(0N-s
     set backspace=indent,eol,start
+    set omnifunc=omni#cpp#complete#Main
+    set tags+=~/.vim/tags " for stl tag
+    " ctrl+space instead of ctrl+x+ctrl+o
+    inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+                \ "\<lt>C-n>" :
+                \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+                \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+                \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+    imap <C-@> <C-Space>
 endfunction
 
 function! FT_lua()
@@ -286,3 +291,17 @@ function! FT_lua()
     set shiftwidth=8
     set softtabstop=8
 endfunction
+
+function! FT_markdown()
+    set expandtab
+    set shiftwidth=2
+    set softtabstop=2
+    set spelllang=en
+    set spell
+endfunction
+
+function! FT_rst()
+    set spell
+    set foldmethod=manual
+endfunction
+
