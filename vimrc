@@ -58,8 +58,6 @@ set laststatus=2
 " %r readonly
 set statusline=\ %{HasPaste()}\ %<%r%f%m\ [%{Tlist_Get_Tagname_By_Line()}]\ \%{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%y\ Line:\ %l\/%L
 
-" set rtp+=$HOME/devNotOnBoard/powerline/powerline/bindings/vim
-
 filetype plugin indent on
 
 " Autocommand
@@ -69,6 +67,7 @@ autocmd FileType arduino call FT_arduino()
 autocmd FileType lua call FT_lua()
 autocmd FileType markdown call FT_markdown()
 autocmd FileType rst call FT_rst()
+autocmd FileType vim call FT_vim()
 
 " Persistence fold
 autocmd BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
@@ -158,6 +157,16 @@ let g:gundo_width = 40
 let g:gundo_preview_height = 20
 let g:gundo_left = 1
 
+" Tag list
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+let Tlist_Process_File_Always = 1
+let Tlist_Show_One_File = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Highlight_Tag_On_BufEnter = 1
+let Tlist_Display_Prototype = 1
+let Tlist_Exit_OnlyWindow = 1
+
 " Associer .seqdiag et .blockdiag au bon type de fichier.
 au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
 au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
@@ -168,16 +177,6 @@ set undofile
 
 " Configure theme
 colorscheme skittles_berry
-
-" Tag list
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-let Tlist_Process_File_Always = 1
-let Tlist_Show_One_File = 1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Highlight_Tag_On_BufEnter = 1
-let Tlist_Display_Prototype = 1
-let Tlist_Exit_OnlyWindow = 1
 
 " Plugin a-vim.
 " Pour changer entre le .c/.h, on spécifie nos dossiers d'inclusions persos
@@ -313,6 +312,19 @@ function! FT_rst()
 endfunction
 
 function! FT_arduino()
+    set expandtab
+    set shiftwidth=4
+    set softtabstop=4
+endfunction
+
+function! FT_markdown()
+    set spell
+    set expandtab
+    set shiftwidth=2
+    set softtabstop=2
+endfunction
+
+function! FT_vim()
     set expandtab
     set shiftwidth=4
     set softtabstop=4
