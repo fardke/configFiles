@@ -65,6 +65,8 @@ autocmd FileType mail,txt set spell
 autocmd FileType cpp,hpp,h call FT_cpp()
 autocmd FileType arduino call FT_arduino()
 autocmd FileType lua call FT_lua()
+autocmd FileType tex call FT_tex()
+
 autocmd FileType markdown call FT_markdown()
 autocmd FileType rst call FT_rst()
 autocmd FileType vim call FT_vim()
@@ -140,6 +142,9 @@ Bundle 'jplaut/vim-arduino-ino'
 
 " Plugin pour la syntax des fichiers specifiques arduino
 Bundle 'sudar/vim-arduino-syntax'
+
+" Plugin pour la syntax blockdiag
+Bundle 'mhaig/vim-blockdiag-series'
 
 call vundle#end()            " required
 
@@ -324,8 +329,41 @@ function! FT_markdown()
     set softtabstop=2
 endfunction
 
+function! FT_tex()
+    set spell
+    set spelllang=fr
+    set expandtab
+    set shiftwidth=2
+    set softtabstop=2
+    let g:tex_flavor='latex'
+endfunction
+
+
 function! FT_vim()
     set expandtab
     set shiftwidth=4
     set softtabstop=4
 endfunction
+
+if did_filetype()
+    finish
+endif
+
+let s:line1 = getline(1)
+
+"" blockdiag series
+if s:line1 =~ '\<diagram\|blockdiag\>\s*{'
+    setfiletype blockdiag
+elseif s:line1 =~ '\<seqdiag\>\s*{'
+    setfiletype seqdiag
+elseif s:line1 =~ '\<actdiag\>\s*{'
+    setfiletype actdiag
+elseif s:line1 =~ '\<nwdiag\>\s*{'
+    setfiletype nwdiag
+elseif s:line1 =~ '\<rackdiag\>\s*{'
+    setfiletype rackdiag
+elseif s:line1 =~ '\<packetdiag\>\s*{'
+    setfiletype packetdiag
+endif
+
+unlet s:line1
