@@ -66,9 +66,8 @@ bindkey "\e[F" end-of-line
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -al'
-alias grep='grep --color=auto'
+alias grep='grep --exclude='tags' --color=auto'
 alias asciidoc='/usr/bin/asciidoc -n -a toc -a toclevels=4 -a max-width=55em -a icons'
-alias vi='vi -O'
 alias tree='tree -C'
 alias minicom='sudo minicom -c on -C /tmp/minicom.cap -D'
 alias python='python2.7'
@@ -77,9 +76,14 @@ alias gcalcli='python2.7 gcalcli'
 alias wgcalcli='watch --color python2.7 gcalcli calw --nolineart --tsv --military -w 27'
 alias cda='cd /home/kewin/.config/awesome'
 alias wookie='python2 /home/kewin/devNotOnBoard/wookie/wookie/wookie.py start'
+alias gd='git d'
+alias mpolka='minicom /dev/ttyUSB1'
+alias mbetty='minicom /dev/ttyUSB0'
+alias tpolka='telnet 10.60.39.85'
+alias vi='vim -O'
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/bin
-export PATH=$JAVA_HOME:$PATH:$HOME/bin/
+export PATH=$JAVA_HOME:$PATH:$HOME/bin/:/usr/local/bin
 export EDITOR=vim
 
 
