@@ -33,7 +33,7 @@ zstyle ':mime:*' mailcap ~/.mailcap
 
 setopt autocd
 
-source $HOME/.zsh/precmd
+source $HOME/configFiles/precmd
 PROMPT="${vcs_info_msg_0_}%{$fg_bold[cyan]%}%n@%M:%{$fg_bold[yellow]%}%~%{$fg_bold[red]%}%(?..[%?])%{$fg_bold[yellow]%} %# %{$reset_color%}"
 
 # completion in the middle of a line

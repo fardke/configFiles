@@ -1,0 +1,31 @@
+#!/bin/shell
+
+precmd()
+{
+    ## Git info in the prompt
+    if [ -d "$PWD/.git" ]; then
+        export BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+        export REV=$(git describe --tags --always $1 2>/dev/null || git rev-parse --short $1 2>/dev/null)
+        export CHANGES=" "
+
+        local st="$(git status 2>/dev/null)"
+
+        if [[ ! $st =~ 'nothing to commit' ]]; then
+            if [[ ! $st =~ 'no changes added to commit' ]]; then
+                CHANGES="%{$fg_bold[red]%}⚑ %{$reset_color%}"
+            else
+                CHANGES="%{$fg_no_bold[green]%}⚐ %{$reset_color%}"
+            fi
+        fi
+    else
+        export BRANCH=""
+        export REV=""
+        export CHANGES="  "
+    fi
+
+    if [ -z $BRANCH ]; then
+        export RPROMPT=""
+    else
+        export RPROMPT="$CHANGES%{$fg_bold[cyan]%}(%{$fg_bold[yellow]%}$BRANCH $REV%{$fg_bold[cyan]%})%{$reset_color%}"
+    fi
+}
