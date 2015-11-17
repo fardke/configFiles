@@ -74,6 +74,7 @@ autocmd FileType vim call FT_vim()
 " Persistence fold
 autocmd BufWinLeave *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst mkview
 autocmd BufWinEnter *.ac,*.am,*.cpp,*.h,*.hxx,*.hpp,*.c,*.rst silent loadview
+autocmd FilterWritePre * if &diff | call FT_diff() | endif
 
 " last position jump.
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -230,12 +231,6 @@ map <C-n> :cn <CR>
 " Bind ctrl +p
 map <C-p> :cp <CR>
 
-" Bind ctrl n et ctrl p pour passer a la prochaine diff dans le cas ou c est
-" un diff.
-au FilterWritePre * if &diff | map <C-n> :DirDiffNext <CR> | endif
-au FilterWritePre * if &diff | map <C-p> :DirDiffPrev <CR> | endif
-au FilterWritePre * if &diff | colorscheme desert | endif
-
 " Aller a l'onglet precedent
 nnoremap <C-Left> :tabprevious<CR>
 
@@ -345,6 +340,14 @@ function! FT_vim()
     set softtabstop=4
 endfunction
 
+function! FT_diff()
+    map <C-n> :DirDiffNext <CR>
+    map <C-p> :DirDiffPrev <CR>
+    nmap <leader>g :diffget<CR>
+    nmap <leader>p :diffput<CR>
+    nmap <leader>u :diffupdate<CR>
+endfunction
+
 if did_filetype()
     finish
 endif
@@ -367,3 +370,4 @@ elseif s:line1 =~ '\<packetdiag\>\s*{'
 endif
 
 unlet s:line1
+
