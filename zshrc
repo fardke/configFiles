@@ -34,7 +34,11 @@ zstyle ':mime:*' mailcap ~/.mailcap
 setopt autocd
 
 source $HOME/configFiles/precmd
-PROMPT="${vcs_info_msg_0_}%{$fg_bold[cyan]%}%n@%M:%{$fg_bold[yellow]%}%~%{$fg_bold[red]%}%(?..[%?])%{$fg_bold[yellow]%} %# %{$reset_color%}"
+COLORPROMPT="%{$fg_bold[cyan]%}"
+if [ $USERNAME = "root" ]; then
+    COLORPROMPT="%{$fg_bold[red]%}"
+fi
+PROMPT="${vcs_info_msg_0_}$COLORPROMPT%n@%M:%{$fg_bold[yellow]%}%~%{$fg_bold[red]%}%(?..[%?])%{$fg_bold[yellow]%} %# %{$reset_color%}"
 
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
