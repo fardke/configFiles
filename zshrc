@@ -40,6 +40,7 @@ if [ $USERNAME = "root" ]; then
 fi
 PROMPT="${vcs_info_msg_0_}$COLORPROMPT%n@%M:%{$fg_bold[yellow]%}%~%{$fg_bold[red]%}%(?..[%?])%{$fg_bold[yellow]%} %# %{$reset_color%}"
 
+bindkey -v
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
 bindkey "\e[1~" beginning-of-line
@@ -55,7 +56,7 @@ bindkey "\e\e[C" forward-word
 bindkey "\e\e[D" backward-word
 bindkey "\e[1;5C" forward-word
 bindkey "\e[1;5D" backward-word
-
+bindkey '^R' history-incremental-search-backward
 # for rxvt
 bindkey "\e[8~" end-of-line
 
