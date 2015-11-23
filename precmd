@@ -4,8 +4,8 @@ precmd()
 {
     ## Git info in the prompt
     if [ -d "$PWD/.git" ]; then
-        export BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-        export REV=$(git describe --tags --always $1 2>/dev/null || git rev-parse --short $1 2>/dev/null)
+        export BRANCH="$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
+        export REV="$(git describe --tags --always $1 2>/dev/null || git rev-parse --short $1 2>/dev/null)"
         export CHANGES=" "
 
         local st="$(git status 2>/dev/null)"
