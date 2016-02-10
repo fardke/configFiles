@@ -86,9 +86,10 @@ alias mpolka='minicom /dev/ttyUSB1'
 alias mbetty='minicom /dev/ttyUSB0'
 alias tpolka='telnet 10.60.39.85'
 alias vi='vim -O'
+alias ubundroid='cd /opt/uck/; sudo ./uck-remaster-chroot-rootfs /opt/ubundroid/ zsh'
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/bin
-export PATH=$JAVA_HOME:$PATH:$HOME/bin/:/usr/local/bin
+export PATH=$JAVA_HOME:/opt/uck/:$PATH:$HOME/bin/:/usr/local/bin
 export EDITOR=vim
 
 

@@ -1,6 +1,41 @@
-#!/bin/shell
+#!/bin/sh
+
+preexec()
+{
+    # Note the date when the command started, in unix time.
+    CMD_START_DATE=$(date +%s)
+    # Store the command that we're running.
+    CMD_NAME=$1
+}
 
 precmd()
+{
+    notificationsForLongCommand
+    gitInfoInPrompt
+
+}
+
+notificationsForLongCommand()
+{
+    # Proceed only if we've ran a command in the current shell.
+    if ! [[ -z $CMD_START_DATE ]]; then
+        # Note current date in unix time
+        CMD_END_DATE=$(date +%s)
+        # Store the difference between the last command start date vs. current date.
+        CMD_ELAPSED_TIME=$(($CMD_END_DATE - $CMD_START_DATE))
+        # Store an arbitrary threshold, in seconds.
+        CMD_NOTIFY_THRESHOLD=30
+
+        if [[ $CMD_ELAPSED_TIME -gt $CMD_NOTIFY_THRESHOLD ]]; then
+            # Beep or visual bell if the elapsed time (in seconds) is greater than threshold
+            print -n '\a'
+            # Send a notification
+            ssh localhost -p 1111 -t "DISPLAY=:0 notify-send \"The job \"$CMD_NAME\" has finished.\""
+        fi
+    fi
+}
+
+gitInfoInPrompt()
 {
     ## Git info in the prompt
     if [ -d "$PWD/.git" ]; then
@@ -17,15 +52,15 @@ precmd()
                 CHANGES="%{$fg_no_bold[green]%}⚐ %{$reset_color%}"
             fi
         fi
-    else
-        export BRANCH=""
-        export REV=""
-        export CHANGES="  "
-    fi
+        else
+            export BRANCH=""
+            export REV=""
+            export CHANGES="  "
+        fi
 
-    if [ -z $BRANCH ]; then
-        export RPROMPT=""
-    else
-        export RPROMPT="$CHANGES%{$fg_bold[cyan]%}(%{$fg_bold[yellow]%}$BRANCH $REV%{$fg_bold[cyan]%})%{$reset_color%}"
-    fi
+        if [ -z $BRANCH ]; then
+            export RPROMPT=""
+        else
+            export RPROMPT="$CHANGES%{$fg_bold[cyan]%}(%{$fg_bold[yellow]%}$BRANCH $REV%{$fg_bold[cyan]%})%{$reset_color%}"
+        fi
 }
