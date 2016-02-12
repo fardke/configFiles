@@ -121,7 +121,9 @@ Bundle 'nblock/vim-dokuwiki'
 Bundle 'tejr/vim-tmux'
 
 " Plugin pour la gestion snipets
-Bundle 'SirVer/ultisnips'
+if v:version >= 704
+    Bundle 'SirVer/ultisnips'
+endif
 
 " Repo pour les snipets
 Bundle 'fardke/vim-snippets'
@@ -178,8 +180,10 @@ au BufRead,BufNewFile *.seqdiag setfiletype seqdiag
 au BufRead,BufNewFile *.blockdiag setfiletype seqdiag
 
 " Undo persistant
-set undodir=~/.vim/temp_dirs/undodir
-set undofile
+if v:version >= 703
+    set undodir=~/.vim/temp_dirs/undodir
+    set undofile
+endif
 
 " Configure theme
 colorscheme skittles_berry
@@ -192,14 +196,16 @@ let g:alernateExtensions_cpp = "h,inc,H,HPP,hpp"
 " Plugin dir diff
 let g:DirDiffDynamicDiffText = 1
 
+if v:version >= 704
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsExpandTrigger="<c-j>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="/home/kewin/.vim/bundle/vim-snippets/UltiSnips/"
+    let g:UltiSnipsEditSplit="vertical"
+    let g:UltiSnipsSnippetsDir="$HOME/.vim/bundle/vim-snippets/UltiSnips/"
+endif
 
 """""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""" Bindings """""""""""""""
@@ -222,8 +228,10 @@ nnoremap <F8> :NERDTreeToggle<CR>
 inoremap <F8> <ESC>:NERDTreeToggle<CR>
 
 " Lancer snippet edition
-nnoremap <F11> :UltiSnipsEdit<CR>
-inoremap <F11> <ESC>:UltiSnipsEdit<CR>
+if v:version >= 704
+    nnoremap <F11> :UltiSnipsEdit<CR>
+    inoremap <F11> <ESC>:UltiSnipsEdit<CR>
+endif
 
 " Bind ctrl +n
 map <C-n> :cn <CR>
@@ -244,7 +252,7 @@ nnoremap <C-c> :tabclose<CR>
 let mapleader = ","
 
 " raccourci pour ouvrir vimrc dans un nouvel onglet
-nmap <leader>v :tabedit /home/kewin/.vimrc<CR>
+nmap <leader>v :tabedit $HOME/.vimrc<CR>
 
 " switch easily between splits
 map <C-h> <C-w>h<C-w>=
@@ -258,7 +266,7 @@ map <C-k> <C-w>k<C-w>=
 
 "auto sourcing when save vimrc
 if has("autocmd")
-        autocmd bufwritepost .vimrc source /home/kewin/.vimrc
+        autocmd bufwritepost .vimrc source $HOME/.vimrc
 endif
 
 " Returns string if paste mode
@@ -273,7 +281,12 @@ function! FT_cpp()
     set foldmethod=syntax
     " the textwidth is used for formatting the comments
     set textwidth=80
-    set colorcolumn=80
+    if v:version >= 703
+        set colorcolumn=80
+    else
+        autocmd BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+        autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+    endif
     set nospell
     " :0 case at same level than switch
     " g0 public, protected, private at same level than calss
