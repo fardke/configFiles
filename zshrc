@@ -76,7 +76,8 @@ alias asciidoc='/usr/bin/asciidoc -n -a toc -a toclevels=4 -a max-width=55em -a 
 alias tree='tree -C'
 alias minicom='sudo minicom -c on -C /tmp/minicom.cap -D'
 alias python='python2.7'
-alias tmuxboulot='ssh kewindesktop -t tmux -u attach -t 0'
+alias tmuxboulot='ssh -R 1111:0.0.0.0:2224 kewindesktop -t "tmux -u attach -t 0"'
+alias tmuxmaison='ssh maison -t "su -c \"tmux attach -t 0\""'
 alias gcalcli='python2.7 gcalcli'
 alias wgcalcli='watch --color python2.7 gcalcli calw --nolineart --tsv --military -w 27'
 alias cda='cd /home/kewin/.config/awesome'
@@ -87,10 +88,18 @@ alias mbetty='minicom /dev/ttyUSB0'
 alias tpolka='telnet 10.60.39.85'
 alias vi='vim -O'
 alias ubundroid='cd /opt/uck/; sudo ./uck-remaster-chroot-rootfs /opt/ubundroid/ zsh'
+alias sshmaison='ssh maison -t "su -c \"tmux attach -t 0\""'
+alias run_sphinx='sudo docker run --rm -v $(pwd):/tmp -w /tmp/ wpbackend/centos7_sphinx bash -c "cp /tmp/latex.py /usr/lib/python2.7/site-packages/sphinx/writers; make $@"'
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk/bin
 export PATH=$JAVA_HOME:/opt/uck/:$PATH:$HOME/bin/:/usr/local/bin
 export EDITOR=vim
 
-
+source $HOME/.alias.zsh
 source $HOME/devNotOnBoard/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+
+function chpwd()
+{
+    ls
+}
